@@ -1,0 +1,8 @@
+.alert{
+    color:red;
+    background-color: darkred;
+    width: 50%;
+    padding: 5px 10px 5px 0;
+    margin: 0 auto;
+    border-radius: 7px;
+}
