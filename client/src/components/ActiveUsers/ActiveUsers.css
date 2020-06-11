@@ -1,0 +1,30 @@
+.users-container{
+    grid-area : ActiveUsers;
+    background-color: darkviolet;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px 1fr;
+    grid-template-areas: 
+            "topic"" list"
+}
+
+.users-title{
+    grid-area: topic;
+    background-color: #36393e;
+    box-shadow: 0 2px 0 0 #202225;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.topic {
+    color: #fff;
+    font-weight: 500;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+}
+
+.users-list{
+    background-color: #2f3136;
+    grid-area: list;
+}

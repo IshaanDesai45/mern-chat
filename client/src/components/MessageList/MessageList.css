@@ -1,0 +1,24 @@
+.messages-container{
+    grid-area : MessageList;
+    background-color: darkslategrey;
+    display: grid;
+    grid-template-rows: 64px 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+                "topic"
+                "messages";
+}
+
+.room-heading{
+    grid-area: topic;
+    background-color: #36393e;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-shadow:  0 2px 0 0 #202225;
+}
+
+.messages{
+    background-color: #36393e;
+}

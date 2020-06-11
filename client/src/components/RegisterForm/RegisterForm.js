@@ -39,15 +39,15 @@ function RegisterForm (props) {
             }
             <div className='inputContainer'>
                 <input value={username} onChange={(event)=>setUsername(event.target.value)} type='text' required/>
-                <span>Username</span>
+                <span className='form-span'>Username</span>
             </div>
             <div className='inputContainer'>
                 <input value={email} onChange={(event)=>setEmail(event.target.value)} type='text' required />
-                <span>email</span>
+                <span className='form-span'>email</span>
             </div>
             <div className='inputContainer'>
                 <input value={password} onChange={(event)=>setPassword(event.target.value)} type='password' required />
-                <span>password</span>
+                <span className='form-span'>password</span>
             </div>
             <div>
                 <button onClick={handleRegister} className='submitBtn btn-bluish'>Submit</button>

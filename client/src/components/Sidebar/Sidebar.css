@@ -1,0 +1,7 @@
+.sidebar-container {
+	grid-area: Sidebar;
+	/* background-color: darkred; */
+	display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-template-areas: "server channel";
+}

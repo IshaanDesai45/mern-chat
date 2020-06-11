@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Router,Route,Redirect} from 'react-router-dom'
 import RegisterForm from './components/RegisterForm/RegisterForm'
 import LoginForm from './components/LoginForm/LoginForm'
@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 
 import {history} from './helpers/history'
 import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from './redux/actions/authActions';
 function App() {
 
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
@@ -25,6 +26,10 @@ function App() {
 
   console.log('re rendered')
 
+  useEffect(()=>{
+    dispatch(loadUser())
+  })
+
   return (
     <div className="App">
       
@@ -40,9 +45,9 @@ function App() {
           </Route>
           <Route path='/dashboard'>
             {
-              isAuthenticated?
-                <Dashboard />:
-                <Redirect to='/login' />
+              // isAuthenticated?
+                <Dashboard />
+                // <Redirect to='/login' />
             }
           </Route>
       </Router>

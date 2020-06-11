@@ -1,7 +1,23 @@
 const express =  require('express')
+const jwt     =  require('jsonwebtoken')
+
 
 function auth (req,res,next){
+    const token = req.header('x-auth-token');
 
+    //check for token
+    if(!token){
+     return   res.status(401).json({msg:'No token,authorization denied'})
+    }
+
+    try{
+        //Verify token
+    const decoded = jwt.verify(token , 'mern-chat')
+    req.user = decoded;
+    next();
+    }catch(e){
+        res.status(400).json({msg : 'Token is not valid'})
+    }
 }
 
-export default auth;
+module.exports = auth;

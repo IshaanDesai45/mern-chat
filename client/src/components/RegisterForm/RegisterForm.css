@@ -44,7 +44,12 @@ input:focus{
     border:1px solid #7289da ;
 }
 
-span{
+input:valid{
+    border:1px solid #7289da ;
+}
+
+
+.form-span{
     position: absolute;
     color: rgba(255,255,255,0.6);
     left: 15px;
@@ -88,7 +93,7 @@ input:focus + span, input:valid +span {
     background-color: #7289da;
 }
 
-.submitBtn:hover{
+.btn-bluish:hover{
     background-color:rgb(79, 95, 152) ;
 }
 

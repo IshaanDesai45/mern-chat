@@ -1,0 +1,39 @@
+.sendmessage-container{
+    grid-area: SendMessage;
+    background-color: #36393e;
+    position: relative;
+    border-top: 2px solid #42454a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+form{
+    width: 100%;
+    position: relative;
+}
+
+
+.send-input{
+    
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 95%;
+        /* margin: 1rem 0; */
+        height: 18px;
+        padding: 0.7rem;
+        color: #fff;
+        background-color: #484b52;
+        border: none;
+        overflow-y : hidden;
+        resize: none;
+        outline: none;
+}
+
+.send-input:hover,.send-input:focus{
+    border:none
+}

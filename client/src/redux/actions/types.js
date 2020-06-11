@@ -8,3 +8,9 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const GET_ERRORS  =  'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+
+//chat action types
+
+export const chatActions = {
+    SEND_MESSAGE  : 'SEND_MESSAGE'
+}

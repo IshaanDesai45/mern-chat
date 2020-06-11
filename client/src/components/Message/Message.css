@@ -1,0 +1,45 @@
+.message-container{
+        display: grid;
+        padding: 12px;
+        width: 90%;
+        margin:0 auto;
+        /* border-top: 2px solid #42454a; */
+        border-bottom: 2px solid #42454a;
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+                "avatar info"
+                "no message";
+}
+
+.avatar{
+        grid-area:avatar;
+        text-align: center;
+}
+.message-info{
+        grid-area : info;
+        
+}
+
+.timestamp{
+        color : #72767d;
+        font-size: 0.75rem;
+        margin-left: 0.3rem;
+}
+
+.author {
+	color: #fff;
+	font-size: 1rem;
+}
+
+.message{
+        grid-area:message;
+        
+}
+
+.message p {
+        margin : 0px 0 0 0;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 400;
+        line-height: 1.375rem;
+}

@@ -12,7 +12,7 @@ import {
 const initialState = { 
     token  :localStorage.getItem('token'),
     isAuthenticated :false,
-    user  :null,
+    user  :{},
     isLoading : false
 }
 
@@ -25,7 +25,7 @@ function authReducers ( state = initialState , action){
         }
         case USER_LOADED   : return{
             ...state,
-            ...action.payload,
+            user : action.payload,
             isAuthenticated :true,
             isLoading :false,
         }

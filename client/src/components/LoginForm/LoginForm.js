@@ -42,12 +42,12 @@ function LoginForm (props) {
         }
         <div className='inputContainer'>
             <input value={email} onChange={(event)=> setEmail(event.target.value)} type='text' required />
-            <span>email</span>
+            <span className='form-span'>email</span>
         </div>
         <div className='inputContainer'>
             <input
             value={password} onChange={(event)=> setPassword(event.target.value)} type='password' required />
-            <span>password</span>
+            <span className='form-span'>password</span>
         </div>
         <div>
             <button onClick={handleLogin} className='submitBtn btn-bluish'>Submit</button>

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken')
 const User   = require('../models/User')
-
+const auth   = require('../middleware/auth')
 router.post('/',(req,res)=>{
     const  {email,password} = req.body;
 
@@ -40,11 +40,11 @@ router.post('/',(req,res)=>{
         })
 })
 
-router.get('/user',(req,res)=>{
+router.get('/user',auth,(req,res)=>{
     
-    User.findById(req.body.email)
+    User.findById(req.user.id)
         .select('-password')
-        .then(user => res.json(user) )
+        .then(user => {return res.json(user) })
 })
 
 module.exports = router

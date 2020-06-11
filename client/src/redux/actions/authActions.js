@@ -1,11 +1,41 @@
 import axios from 'axios'
-import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS } from '../actions/types'
+import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS,USER_LOADED,USER_LOADING,AUTH_ERROR } from '../actions/types'
 import {history} from '../../helpers/history'
 import {returnErrors} from './errorActions'
+// import {  } from '../../../../../Reac/t-learning/mern-exercise-tracker/src/redux/actions/types'
 
 
-export const loadUser =()=>{
-    
+export const loadUser =()=>(dispatch,getState)=>{
+    //User Loading
+    dispatch({type:USER_LOADING})
+
+    const token = getState().auth.token;
+
+    //headers
+
+    const config ={
+        headers:{
+            "Content-type" :  "application/json"
+        }
+    }
+
+    if(token){
+        config.headers['x-auth-token'] = token;
+    }
+
+    axios.get('http://localhost:5000/login/user',config)
+        .then(user => {
+            dispatch({
+                type:USER_LOADED,
+                payload:user.data
+            })
+        })
+        .catch(err=>{
+            dispatch(returnErrors(err.response.data,err.response.status))
+            dispatch({
+                type :AUTH_ERROR
+            })
+        })
 }
 
 //action creator for registeration
@@ -64,7 +94,9 @@ export const login = ({email,password}) => (dispatch,getState)=>{
 
 
 export const logout = ()=>(dispatch) =>{
-    dispatch({
-        type:LOGOUT_SUCCESS
-    })
+
+    const logoutcreator = ()=>({type:LOGOUT_SUCCESS})
+    dispatch(logoutcreator())
+
+    history.push('/login')
 }

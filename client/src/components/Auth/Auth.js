@@ -20,7 +20,7 @@ function Auth () {
                         <p className='cardDescp'>Create a new account</p>
                         <p><i className="fas fa-user-plus"></i></p>
                         <Link to='/register' className='submitBtn btn-bluish'>Create</Link>
-                        <button onClick={handleLogout} className='submitBtn btn-bluish'>Logout</button>
+                        {/* <button onClick={handleLogout} className='submitBtn btn-bluish'>Logout</button> */}
                     </Link >
                     <Link to='/login' className="authCard">
                         <h2 className='cardHead greenColor'>Login</h2>
