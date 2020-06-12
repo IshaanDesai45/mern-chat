@@ -10,7 +10,4 @@ export const GET_ERRORS  =  'GET_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 //chat action types
-
-export const chatActions = {
-    SEND_MESSAGE  : 'SEND_MESSAGE'
-}
+export const GET_CHATS = 'GET_CHATS'

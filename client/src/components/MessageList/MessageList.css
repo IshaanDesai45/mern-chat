@@ -1,5 +1,6 @@
 .messages-container{
     grid-area : MessageList;
+    overflow-y: auto;
     background-color: darkslategrey;
     display: grid;
     grid-template-rows: 64px 1fr;
@@ -21,4 +22,6 @@
 
 .messages{
     background-color: #36393e;
+    overflow-y: scroll;
+    /* scroll-behavior: smooth; */
 }

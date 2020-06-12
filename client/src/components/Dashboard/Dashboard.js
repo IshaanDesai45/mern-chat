@@ -6,6 +6,8 @@ import ActiveUsers from '../ActiveUsers/ActiveUsers'
 import io from 'socket.io-client'
 import './Dashboard.css'
 import { useDispatch, useSelector } from 'react-redux'
+import {getChats} from '../../redux/actions/chatActions'
+// import { GET_CHATS } from '../../redux/actions/types'
 
 function Dashboard () {
 
@@ -21,6 +23,9 @@ function Dashboard () {
     socket.emit('join',activeChannel)
 
     useEffect(()=>{
+
+      dispatch(getChats())
+
       socket.on('update',(action)=>{
         console.log('to update')
         dispatch(action)

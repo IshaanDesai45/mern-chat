@@ -1,4 +1,4 @@
-import {chatActions} from '../actions/types'
+import {GET_CHATS} from '../actions/types'
 
 const initialState = {
     messages : [],
@@ -14,6 +14,10 @@ function chatReducers (state=initialState,action){
             messages : [...state.messages,action.payload]
         }
 
+        case GET_CHATS : return{
+            ...state,
+            messages : action.payload
+        }
         default : return state
     }
 

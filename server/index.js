@@ -5,10 +5,12 @@ const mongoose  = require('mongoose')
 const socketIo        = require('socket.io')
 const loginRoute    = require('./routes/loginRoute')
 const registerRoute = require('./routes/registerRoute.js')
+const chatRoute  = require('./routes/chatRoute')
 const http = require('http')
 const moment = require('moment')
 const port  =5000;
 const Message =     require('./models/Message')
+
 //setting up socketIo server
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -38,7 +40,8 @@ io.on('connection',(socket)=>{
             {
                 msg : message,
                 username,
-                date : Date.now()
+                date : Date.now(),
+                channel : activeChannel
             }
         ) 
         newMessage.save()
@@ -51,6 +54,7 @@ io.on('connection',(socket)=>{
 
     })
 
+
     //for disconnection
     socket.on("disconnect", () => console.log("Client disconnected"));
 })
@@ -60,7 +64,7 @@ io.on('connection',(socket)=>{
     
 app.use('/login', loginRoute);
 app.use('/register',registerRoute);
-
+app.use('/getChats',chatRoute)
 //listening for request on port 5000
 server.listen(port,()=>{
     console.log(`Server is running on Port : ${port}`)
