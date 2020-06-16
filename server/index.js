@@ -10,15 +10,16 @@ const http = require('http')
 const moment = require('moment')
 const port  =5000;
 const Message =     require('./models/Message')
-
+const multer = require('multer')
 //setting up socketIo server
 const server = http.createServer(app);
 const io = socketIo(server);
+const path = require('path')
 
 //so that we don't need body parser
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static("uploads"));
 //connecting backend to the database
 mongoose.connect("mongodb+srv://Ishaan:Ishaan1234@cluster0-bkgnb.mongodb.net/mern-chat?retryWrites=true&w=majority",{
     useNewUrlParser  : true,
@@ -35,12 +36,13 @@ io.on('connection',(socket)=>{
         socket.join(activeChannel)
     })
     //for simple-input-message 
-    socket.on('simple-input-message',({message,username,activeChannel})=>{
+    socket.on('simple-input-message',({message,username,activeChannel,type})=>{
         const newMessage = new Message (
             {
                 msg : message,
                 username,
                 date : Date.now(),
+                type,
                 channel : activeChannel
             }
         ) 
@@ -64,8 +66,12 @@ io.on('connection',(socket)=>{
     
 app.use('/login', loginRoute);
 app.use('/register',registerRoute);
-app.use('/getChats',chatRoute)
+app.use('/',chatRoute)
 //listening for request on port 5000
+
+
+
+
 server.listen(port,()=>{
     console.log(`Server is running on Port : ${port}`)
 })

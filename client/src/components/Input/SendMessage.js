@@ -1,16 +1,16 @@
 import React,{useState,useRef, useEffect} from 'react'
 import './SendMessage.css'
 import { useSelector } from 'react-redux'
-
+// import Dropzone from 'react-dropzone'
+import axios from 'axios'
 function SendMessage (props){
-
     const textareaRef = useRef(null)
     const sendmessageRef = useRef(null)
     const username           = useSelector(state => state.auth.user.username)
     const activeChannel        = useSelector(state => state.chat.activeChannel)
     //local state to control the input 
     const [message,setMessage] = useState('');
-
+    // const [selectedFile,setSelectedFile] = useState(null)
 
     //using useEffect to autoSize the textArea
 
@@ -38,10 +38,10 @@ function SendMessage (props){
     const handleOnSubmit = ()=>{
         // event.preventDefault();
         const formattedMessage = message.trim()
-
+        const type = 'text'
         if(formattedMessage !== '' ){
             console.log(formattedMessage);
-            props.socket.emit('simple-input-message',{message,username,activeChannel})
+            props.socket.emit('simple-input-message',{message,username,activeChannel,type})
             setMessage('')
         }
         
@@ -54,6 +54,28 @@ function SendMessage (props){
        }
     }
 
+    const fileSelectedHandler = (event)=>{
+        // setSelectedFile(event.target.files[0])
+        let file = event.target.files[0]
+        let formData = new FormData();
+        const config = { 
+            header : {"Content-Type" : "multipart/form-data" }
+        }
+        formData.append("file",file);
+        console.log(formData.get('file'))
+        console.log(formData)
+        axios.post('http://localhost:5000/upload',formData,config)
+            .then(res=>
+                {
+                   const type= 'image';
+                   
+                   if(res.data.success){
+                       console.log(res.data.url)
+                    props.socket.emit('simple-input-message',{message:res.data.url,username,activeChannel,type})
+                   }
+                })
+            .catch(err=>console.log(err))
+    }
 
     
 
@@ -70,6 +92,23 @@ function SendMessage (props){
                     onKeyUp={ handleKeyPress}
                     placeholder='#Message'
                 />
+                
+                {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                {({getRootProps, getInputProps}) => (
+                    <section>
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop some files here, or click to select files</p>
+                    </div>
+                    </section>
+                )}
+                </Dropzone> */}
+
+                <label className='attachment-icon'>
+                    <i className="fas fa-paperclip"></i>
+                    <input onChange={fileSelectedHandler} className='attachment' type='file' />
+                </label>
+                
             </form>
         </div>
     )

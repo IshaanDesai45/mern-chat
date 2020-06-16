@@ -18,7 +18,7 @@ function MessageList (){
                 <h1 className='topic'>Message List</h1>
             </div>
             <div ref={messagesClassRef} className='messages'>
-                {messages.map((message,i)=> {return <Message key={i} msg={message.msg} username={message.username} date={message.date} />})}
+                {messages.map((message,i)=> {return <Message key={i} message={message} />})}
             </div>
         </div>
     )

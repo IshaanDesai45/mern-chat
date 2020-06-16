@@ -6,10 +6,14 @@ function Message (props) {
         <div className='message-container'>
             <div className='avatar'><i className="user-icon fas fa-user"></i></div>
             <div className='message-info'>
-                    <span className='author'>{props.username}</span>
-    <span className='timestamp'>- {props.date}</span>
+                    <span className='author'>{props.message.username}</span>
+    <span className='timestamp'>- {props.message.date}</span>
                     <div className='message'>
-                        <p>{props.msg}</p>
+                       {
+                           props.message.type === 'text'?
+                                <p>{props.message.msg}</p>:
+                                <img style={{maxWidth : "250px"}} src={`http://localhost:5000/${props.message.msg}`} alt='image' />
+                       }
                     </div>
             </div>
             
