@@ -57,3 +57,37 @@ form{
     display: none;
     
 }
+
+.emoji-icon{
+    position: absolute;
+    top: 50%;
+    /* left: 95%; */
+    right: 9%;
+    transform: translate(50%,-50%);
+    color: rgba(255,255,255,0.1);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+aside.emoji-picker-react {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 250px;
+    font-family: sans-serif;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* box-shadow: 0 5px 10px #efefef; */
+    overflow: hidden;
+    position: relative;
+    position: absolute;
+    top: -255px;
+    left: -20px;
+
+}
+
+.hidden{
+    display: none;
+}

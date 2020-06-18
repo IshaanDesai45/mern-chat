@@ -1,14 +1,18 @@
 import React,{useState,useRef, useEffect} from 'react'
 import './SendMessage.css'
 import { useSelector } from 'react-redux'
+import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
+
 // import Dropzone from 'react-dropzone'
 import axios from 'axios'
 function SendMessage (props){
     const textareaRef = useRef(null)
     const sendmessageRef = useRef(null)
+    
     const username           = useSelector(state => state.auth.user.username)
     const activeChannel        = useSelector(state => state.chat.activeChannel)
     //local state to control the input 
+    const [emojiEntry,setEmojiEntry] = useState(false)
     const [message,setMessage] = useState('');
     // const [selectedFile,setSelectedFile] = useState(null)
 
@@ -77,7 +81,17 @@ function SendMessage (props){
             .catch(err=>console.log(err))
     }
 
-    
+    const onEmojiClick = (event,emojiObject)=>{
+        setMessage(prev => prev+ emojiObject.emoji)
+    }
+
+    function classList(classes) {
+        return Object
+          .entries(classes)
+          .filter(entry => entry[1])
+          .map(entry => entry[0])
+          .join(' ');
+      }
 
     return(
         <div ref={sendmessageRef} className='sendmessage-container'>
@@ -93,20 +107,21 @@ function SendMessage (props){
                     placeholder='#Message'
                 />
                 
-                {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                {({getRootProps, getInputProps}) => (
-                    <section>
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>Drag 'n' drop some files here, or click to select files</p>
-                    </div>
-                    </section>
-                )}
-                </Dropzone> */}
+                
 
                 <label className='attachment-icon'>
                     <i className="fas fa-paperclip"></i>
                     <input onChange={fileSelectedHandler} className='attachment' type='file' />
+                </label>
+
+                <label className='emoji-icon'>
+                    <i onClick={()=> setEmojiEntry(prev => !prev)} class="far fa-smile"></i>
+                    <div className={classList({
+                        'hidden' : emojiEntry === false
+                    })}>
+                        <Picker onEmojiClick={onEmojiClick} disableAutoFocus={true} skinTone={SKIN_TONE_MEDIUM_DARK} groupNames={{smileys_people:"PEOPLE"}}/>
+                    </div>
+                    
                 </label>
                 
             </form>
