@@ -5,7 +5,10 @@ const Schema  =  mongoose.Schema ;
 const messagesSchema = new Schema({
    msg : {type:String,trim:true,required:true},
    date:  {type:Date,required:true,default:Date.now},
-   username : {type:String,required:true},
+   user: { 
+      type: Schema.Types.ObjectId,
+      ref: 'User' 
+   },
    channel: {type:String,required:true},
    type : {type:String,required:true}
 },{timestamps:true});

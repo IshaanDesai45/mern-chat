@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import './Message.css'
-import Picker, { SKIN_TONE_MEDIUM_DARK } from 'emoji-picker-react';
+
 function Message (props) {
 
     const [messageImageZoom,setMessageImageZoom] = useState(false)
@@ -29,7 +29,7 @@ function Message (props) {
         <div className='message-container'>
             <div className='avatar'><i className="user-icon fas fa-user"></i></div>
             <div className='message-info'>
-                    <span className='author'>{props.message.username}</span>
+                    <span className='author'>{props.message.user.username}</span>
     <span className='timestamp'>- {props.message.date}</span>
                     <div  className={
                         classList({
@@ -42,7 +42,7 @@ function Message (props) {
                        {
                            props.message.type === 'text'?
                                 <p>{props.message.msg}</p>:
-                                <img ref={imageRef} onClick={zoomify} style={{maxWidth : "250px"}} src={`http://localhost:5000/${props.message.msg}`} alt='image' />
+                                <img ref={imageRef} onClick={zoomify} style={{maxWidth : "250px"}} src={`http://localhost:5000/${props.message.msg}`} alt='imageField' />
                        }
                     </div>
             </div>

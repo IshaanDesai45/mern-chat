@@ -7,8 +7,9 @@ const stream = require('stream')
 
 router.get('/getChats',(req,res)=>{
     const {channel} = req.body;
-    console.log(channel)
+    // console.log(channel)
     Message.find()
+        .populate('user')
         .exec((err,chats)=>{
             if(err) return res.status(400).json('could not load messages ');
 

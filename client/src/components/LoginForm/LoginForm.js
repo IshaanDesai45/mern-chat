@@ -7,7 +7,7 @@ function LoginForm (props) {
 
     const dispatch = useDispatch();
     const error = useSelector (state => state.error)
-    const history = useHistory()
+    
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 

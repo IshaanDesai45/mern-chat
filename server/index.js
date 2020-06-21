@@ -36,11 +36,11 @@ io.on('connection',(socket)=>{
         socket.join(activeChannel)
     })
     //for simple-input-message 
-    socket.on('simple-input-message',({message,username,activeChannel,type})=>{
+    socket.on('simple-input-message',({message,userId,activeChannel,type})=>{
         const newMessage = new Message (
             {
                 msg : message,
-                username,
+                user : userId,
                 date : Date.now(),
                 type,
                 channel : activeChannel
@@ -48,9 +48,16 @@ io.on('connection',(socket)=>{
         ) 
         newMessage.save()
             .then(message=>{
-                const action = {type:'UPDATE',payload:message};
-                console.log('going to update')
-                io.to(activeChannel).emit('update',action)
+
+                Message.findById(message.id)
+                    .populate('user')
+                    .exec((err,messagePopulated)=>{
+                        console.log(messagePopulated)
+                        const action = {type:'UPDATE',payload:messagePopulated};
+                        console.log('going to update')
+                        io.to(activeChannel).emit('update',action)
+                    })
+                
             })
             .catch(err=>console.log(err))
 

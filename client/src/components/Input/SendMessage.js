@@ -9,7 +9,7 @@ function SendMessage (props){
     const textareaRef = useRef(null)
     const sendmessageRef = useRef(null)
     
-    const username           = useSelector(state => state.auth.user.username)
+    const userId        = useSelector(state => state.auth.user._id)
     const activeChannel        = useSelector(state => state.chat.activeChannel)
     //local state to control the input 
     const [emojiEntry,setEmojiEntry] = useState(false)
@@ -45,7 +45,7 @@ function SendMessage (props){
         const type = 'text'
         if(formattedMessage !== '' ){
             console.log(formattedMessage);
-            props.socket.emit('simple-input-message',{message,username,activeChannel,type})
+            props.socket.emit('simple-input-message',{message,userId,activeChannel,type})
             setMessage('')
         }
         
@@ -75,7 +75,7 @@ function SendMessage (props){
                    
                    if(res.data.success){
                        console.log(res.data.url)
-                    props.socket.emit('simple-input-message',{message:res.data.url,username,activeChannel,type})
+                    props.socket.emit('simple-input-message',{message:res.data.url,userId,activeChannel,type})
                    }
                 })
             .catch(err=>console.log(err))
@@ -117,6 +117,7 @@ function SendMessage (props){
                 <label className='emoji-icon'>
                     <i onClick={()=> setEmojiEntry(prev => !prev)} class="far fa-smile"></i>
                     <div className={classList({
+                        'picker-container' :  true,
                         'hidden' : emojiEntry === false
                     })}>
                         <Picker onEmojiClick={onEmojiClick} disableAutoFocus={true} skinTone={SKIN_TONE_MEDIUM_DARK} groupNames={{smileys_people:"PEOPLE"}}/>

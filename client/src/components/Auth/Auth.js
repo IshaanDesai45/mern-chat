@@ -1,16 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Auth.css'
-import {logout} from '../../redux/actions/authActions'
-import {useDispatch} from 'react-redux'
 function Auth () {
-
-    const dispatch = useDispatch()
-    const handleLogout =()=>{
-        dispatch(logout())
-    }
-   
-
     return (
         <div className="formContainer auth">
                 <h2 className='bulishColor'>Create Account or,Sign In</h2>

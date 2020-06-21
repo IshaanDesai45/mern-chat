@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import './ChannelContainer.css'
 import {logout} from '../../redux/actions/authActions'
